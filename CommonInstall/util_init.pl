@@ -329,12 +329,14 @@ sub determine_os_version()
 		my %distroVendor = (
 			"rhel" => "redhat",
 			"centos" => "redhat",
+			"rocky" => "redhat",
 			"sles" => "SuSE",
 			"sle_hpc" => "SuSE"
 		);
 		my %network_conf_dir  = (
 			"rhel" => $NETWORK_CONF_DIR,
 			"centos" => $NETWORK_CONF_DIR,
+			"rocky" => $NETWORK_CONF_DIR,
 			"sles" => "/etc/sysconfig/network",
 			"sle_hpc" => "/etc/sysconfig/network"
 		);
@@ -363,6 +365,8 @@ sub determine_os_version()
 		} elsif ($CUR_DISTRO_VENDOR eq "SuSE") {
 			$NETWORK_CONF_DIR = "/etc/sysconfig/network";
 		} elsif ($CUR_DISTRO_VENDOR eq "centos") {
+			$CUR_DISTRO_VENDOR = "redhat";
+		} elsif ($CUR_DISTRO_VENDOR eq "rocky") {
 			$CUR_DISTRO_VENDOR = "redhat";
 		}
 	}
