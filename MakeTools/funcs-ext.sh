@@ -830,9 +830,9 @@ function os_vendor_version()
 		then
 			# CentOS 
 			rval="ES"`cat /etc/redhat-release | sed -r 's/^.+([[:digit:]])\.([[:digit:]]).+$/\1\2/'`
-		elif grep -qi scientific /etc/redhat-release
+		elif egrep -qi 'scientific|rocky' /etc/redhat-release
 		then
-			# Scientific Linux.
+			# Scientific Linux and Rocky Linux - They share a similar format
 			rval="ES"`cat /etc/redhat-release | sed -r 's/^.+([[:digit:]])\.([[:digit:]]).+$/\1/'`
 		else
 			rval=`cat /etc/redhat-release | cut -d' ' -f5`
