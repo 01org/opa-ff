@@ -67,9 +67,13 @@ else
 		then
 			# CentOS 
 			rval=`cat /etc/redhat-release | sed -r 's/^.+([[:digit:]])\.([[:digit:]]).+$/\1.\2/'`
-		elif egrep -qi 'scientific|rocky' /etc/redhat-release
+		elif grep -qi scientific /etc/redhat-release
 		then
-			# Scientific Linux and Rocky Linux
+			# Scientific Linux.
+			rval=`cat /etc/redhat-release | sed -r 's/^.+([[:digit:]])\.([[:digit:]]).+$/\1.\2/'`
+		elif grep -qi rocky /etc/redhat-release
+		then
+			# Rocky Linux.
 			rval=`cat /etc/redhat-release | sed -r 's/^.+([[:digit:]])\.([[:digit:]]).+$/\1.\2/'`
 		else
 			rval=`cat /etc/redhat-release | cut -d' ' -f5`
