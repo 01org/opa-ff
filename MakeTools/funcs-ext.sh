@@ -725,6 +725,9 @@ function os_vendor()
             centos)
                 rval=redhat
                 ;;
+            rocky)
+                rval=redhat
+                ;;
             fedora)
                 rval=redhat
                 ;;
