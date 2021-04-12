@@ -257,6 +257,12 @@ sub os_vendor_version($)
 			$rval = `cat /etc/redhat-release`;
 			$rval =~ m/(\d+).(\d+)/;
 			$rval="ES".$1;
+		} elsif (!system("grep -qi Rocky /etc/redhat-release")) {
+			# Find a number of the form "#.#" and output the portion
+			# to the left of the decimal point.
+			$rval = `cat /etc/redhat-release`;
+			$rval =~ m/(\d+).(\d+)/;
+			$rval="ES".$1;
 		} elsif (!system("grep -qi enterprise /etc/redhat-release")) {
 			# Red Hat Enterprise Linux Server release $a.$b (name)
 			#PR 110926
@@ -303,6 +309,8 @@ sub determine_os_version()
 	if ( -e "/etc/redhat-release" && !(-l "/etc/redhat-release") ) {
 		$CUR_DISTRO_VENDOR = "redhat";
 	} elsif ( -s "/etc/centos-release" ) {
+		$CUR_DISTRO_VENDOR = "redhat";
+	} elsif ( -s "/etc/rocky-release" ) {
 		$CUR_DISTRO_VENDOR = "redhat";
 	} elsif ( -s "/etc/UnitedLinux-release" ) {
 		$CUR_DISTRO_VENDOR = "UnitedLinux";
